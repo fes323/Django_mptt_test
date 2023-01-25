@@ -1,0 +1,25 @@
+{% load mptt_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MPTT Tree</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<ul class="dropdown">
+    <h1>Главное меню</h1>
+    {% recursetree menu %}
+    <li>
+        <a href="{{ node.get_absolute_url }}">{{ node.name }}</a>
+        {% if not node.is_leaf_node %}
+        <ul class="children">
+            <a href="{{ node.get_absolute_url }}">{{ children }}</a>
+        </ul>
+        {% endif %}
+    </li>
+    {% endrecursetree %}
+</ul>
+</body>
+</html>
